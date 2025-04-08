@@ -1,0 +1,104 @@
+Started by GitHub push by ademarlii
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\VizeSinavUygulama
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\VizeSinavUygulama\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/ademarlii/VizeSinavUygulama.git # timeout=10
+Fetching upstream changes from https://github.com/ademarlii/VizeSinavUygulama.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.47.0.windows.2'
+ > git.exe fetch --tags --force --progress -- https://github.com/ademarlii/VizeSinavUygulama.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 379066ab9650b7f9f6f5ce3598d9e6cf110b1c71 (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 379066ab9650b7f9f6f5ce3598d9e6cf110b1c71 # timeout=10
+ > git.exe branch -a -v --no-abbrev # timeout=10
+ > git.exe branch -D main # timeout=10
+ > git.exe checkout -b main 379066ab9650b7f9f6f5ce3598d9e6cf110b1c71 # timeout=10
+Commit message: "Delete Dockerfile.txt"
+ > git.exe rev-list --no-walk 558f5307228bc9d37e5caa9e5e5129b12c616fdf # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] echo
+Build Docker File
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\VizeSinavUygulama>docker build -t vizesnv_iamge . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 121B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:latest
+#2 DONE 49.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 23.79kB 0.0s done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/nginx:latest@sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab
+#5 resolve docker.io/library/nginx:latest@sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab 0.0s done
+#5 CACHED
+
+#6 [2/2] COPY  . /usr/share/nginx/html/
+#6 DONE 0.1s
+
+#7 exporting to image
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:acf43237210fd60fd48a213e57f34bc21e2022ecdd5956a77bf0c61cf1e8ebb8 done
+#7 exporting config sha256:d961850712adc165dfa63a4a61a74f848319cb55fe64f39bb7073d55a54e7313 done
+#7 exporting attestation manifest sha256:9391c3e0ae2842a85540788fb0be3eca7774e8fd8d10eff35fa73449a0368220 0.0s done
+#7 exporting manifest list sha256:36bbbfe2f8813e6d4b49d969b0d8b1065ccf0922e8fad56eb969b9c2b71bd7b6 done
+#7 naming to docker.io/library/vizesnv_iamge:latest done
+#7 unpacking to docker.io/library/vizesnv_iamge:latest 0.1s done
+#7 DONE 0.2s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Önceki Containerları Sil)
+[Pipeline] echo
+Önceki Containerları Sil
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\VizeSinavUygulama>docker rm -f vizesnv_container   || exit 0 
+vizesnv_container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Run işlemi Gerçekleştir)
+[Pipeline] echo
+Docker Container Run İşlemi
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\VizeSinavUygulama>docker run -d --name vizesnv_container -p 4444:80 vizesnv_iamge 
+8c1b7c17dc1166b958ac40e5aeeb001e35e409883512aa1708bc9afbe9232dfc
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+başarılı bir şekilde çalıştı : http://localhost:4444
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
