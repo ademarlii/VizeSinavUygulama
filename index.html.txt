@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<h1>Adem arlı</h1>
+<h1>02220224301</h1>
+<h1>Bu bir sınav sayfasıdır</h1>
+
+</body>
+</html>
